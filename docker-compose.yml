@@ -1,0 +1,53 @@
+version: '2'
+
+services:
+# T I C K E T
+  postgres-ticket:
+    container_name: victor-ticket
+    build: ./ticket/postgres
+    volumes:
+      - ./ticket-volume:/var/lib/postgresql
+    ports:
+      - 5433:5432
+
+  ticket-service:
+    container_name: victor-ticket_service
+    build: ./ticket/
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres-ticket
+
+# H O T E L
+  postgres-hotel:
+    container_name: victor-hotel
+    build: ./hotel/postgres
+    volumes:
+      - ./hotel-volume:/var/lib/postgresql
+    ports:
+      - 5434:5432
+
+  hotel-service:
+    container_name: victor-hotel_service
+    build: ./hotel/
+    ports:
+      - 8081:8080
+    depends_on:
+      - postgres-hotel
+
+# A G E N C Y
+  postgres-agency:
+    container_name: victor-agency
+    build: ./agency/postgres
+    volumes:
+      - ./agency-volume:/var/lib/postgresql
+    ports:
+      - 5435:5432
+
+  agency-service:
+    container_name: victor-agency_service
+    build: ./agency/
+    ports:
+      - 8082:8080
+    depends_on:
+      - postgres-agency
