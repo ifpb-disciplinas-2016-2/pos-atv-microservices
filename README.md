@@ -15,3 +15,4 @@ O serviços *REST* da aplicação pode ser acessado nas seguintes *URLs*:
   * Agência - quem cria o pacote de viagem, *URL*: *http://localhost:8082/agency/ws/pacotes*
   * Hotel - *URL*: *http://localhost:8081/hotel/ws/reservas*
   * Passagem - *URL*: *http://localhost:8080/ticket/ws/reservas*
+  * Cliente - *URL*: *http://localhost:8083/client/ws/clientes* 

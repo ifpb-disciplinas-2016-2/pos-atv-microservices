@@ -40,6 +40,7 @@ public class TicketResource {
     @Context
     private UriInfo uriInfo;
     private final Link selfLink = Link.fromUri("http://localhost:8080/ticket/ws/reservas").rel("self").build();
+    private final Link clientLink = Link.fromUri("http://localhost:8083/agency/ws/clientes").rel("self").build();
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -50,7 +51,7 @@ public class TicketResource {
         GenericEntity<List<Ticket>> genericTickets = new GenericEntity<List<Ticket>>(tickets) {
         };
 
-        return Response.ok().entity(genericTickets).links(selfLink).build();
+        return Response.ok().entity(genericTickets).links(selfLink, clientLink).build();
     }
 
     @POST
@@ -70,7 +71,7 @@ public class TicketResource {
 
         URI resourceUri = uriInfo.getAbsolutePathBuilder().path(String.valueOf(ticket.getId())).build();
 
-        return Response.created(resourceUri).entity(ticket).links(selfLink).build();
+        return Response.created(resourceUri).entity(ticket).links(selfLink, clientLink).build();
     }
 
     @GET
@@ -84,7 +85,7 @@ public class TicketResource {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        return Response.ok().entity(ticket).links(selfLink).build();
+        return Response.ok().entity(ticket).links(selfLink, clientLink).build();
     }
 
     @PUT
@@ -115,7 +116,7 @@ public class TicketResource {
             ticket.setDate(newDate);
             ticketManager.updateTicket(ticket);
 
-            return Response.ok().entity(ticket).links(selfLink).build();
+            return Response.ok().entity(ticket).links(selfLink, clientLink).build();
         } catch (Exception ex) {
             return invalidDatePatternResponse;
         }

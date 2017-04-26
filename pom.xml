@@ -12,5 +12,6 @@
     <module>agency</module>
     <module>ticket</module>
     <module>hotel</module>
+    <module>client</module>
   </modules>
 </project>

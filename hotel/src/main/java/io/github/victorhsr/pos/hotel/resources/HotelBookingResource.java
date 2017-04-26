@@ -40,7 +40,8 @@ public class HotelBookingResource {
     @Context
     private UriInfo uriInfo;
     private final Link selfLink = Link.fromUri("http://localhost:8081/hotel/ws/reservas").rel("self").build();
-
+    private final Link clientLink = Link.fromUri("http://localhost:8083/agency/ws/clientes").rel("self").build();
+    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll() {
@@ -50,7 +51,7 @@ public class HotelBookingResource {
         GenericEntity<List<HotelBooking>> genericBookings = new GenericEntity<List<HotelBooking>>(bookings) {
         };
 
-        return Response.ok().entity(genericBookings).links(selfLink).build();
+        return Response.ok().entity(genericBookings).links(selfLink, clientLink).build();
     }
 
     @POST
@@ -70,7 +71,7 @@ public class HotelBookingResource {
 
         URI resourceUri = uriInfo.getAbsolutePathBuilder().path(String.valueOf(hotelBooking.getId())).build();
 
-        return Response.created(resourceUri).entity(hotelBooking).links(selfLink).build();
+        return Response.created(resourceUri).entity(hotelBooking).links(selfLink, clientLink).build();
     }
 
     @GET
@@ -84,7 +85,7 @@ public class HotelBookingResource {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        return Response.ok().entity(booking).links(selfLink).build();
+        return Response.ok().entity(booking).links(selfLink, clientLink).build();
     }
 
     @PUT
@@ -115,7 +116,7 @@ public class HotelBookingResource {
             booking.setDate(newDate);
             hotelBookingManager.atualizarReservaHotel(booking);
 
-            return Response.ok().entity(booking).links(selfLink).build();
+            return Response.ok().entity(booking).links(selfLink, clientLink).build();
         } catch (Exception ex) {
             return invalidDatePatterResponse;
         }

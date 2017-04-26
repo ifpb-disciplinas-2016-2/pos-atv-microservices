@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
@@ -22,6 +23,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * @author Victor Hugo <victor.hugo.origins@gmail.com>
  */
 @Entity
+@XmlRootElement
 public class Package implements Serializable {
 
     @Id
@@ -86,8 +88,8 @@ public class Package implements Serializable {
     }
 
     @Override
-    public String toString(){
-      return "client - "+client+", hotel - "+hotelBooking+", passagem - "+ticketBooking+", date - "+date;
+    public String toString() {
+        return "client - " + client + ", hotel - " + hotelBooking + ", passagem - " + ticketBooking + ", date - " + date;
     }
 
 }

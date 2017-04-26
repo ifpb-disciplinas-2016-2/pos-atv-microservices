@@ -51,6 +51,7 @@ public class PackageResources {
     private final Link hotelLink = Link.fromUri("http://localhost:8081/hotel/ws/reservas").rel("hotel").build();
     private final Link ticketLink = Link.fromUri("http://localhost:8080/ticket/ws/reservas").rel("passagem").build();
     private final Link selfLink = Link.fromUri("http://localhost:8082/agency/ws/pacotes").rel("self").build();
+    private final Link clientLink = Link.fromUri("http://localhost:8083/agency/ws/clientes").rel("self").build();
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -61,7 +62,7 @@ public class PackageResources {
         GenericEntity<List<Package>> genericPackages = new GenericEntity<List<Package>>(packages) {
         };
 
-        return Response.ok().entity(genericPackages).links(selfLink, ticketLink, hotelLink).build();
+        return Response.ok().entity(genericPackages).links(selfLink, ticketLink, hotelLink, clientLink).build();
     }
 
     @POST
@@ -86,7 +87,7 @@ public class PackageResources {
 
         URI resourceUri = uriInfo.getAbsolutePathBuilder().path(String.valueOf(myPackage.getId())).build();
 
-        return Response.created(resourceUri).entity(myPackage).links(selfLink, hotelLink, ticketLink).build();
+        return Response.created(resourceUri).entity(myPackage).links(selfLink, hotelLink, ticketLink, clientLink).build();
     }
 
     @GET
@@ -100,7 +101,7 @@ public class PackageResources {
             return Response.status(Status.NOT_FOUND).build();
         }
 
-        return Response.ok().entity(myPackage).links(selfLink, hotelLink, ticketLink).build();
+        return Response.ok().entity(myPackage).links(selfLink, hotelLink, ticketLink, clientLink).build();
     }
 
     @PUT
@@ -134,7 +135,7 @@ public class PackageResources {
             myPackage.setDate(newDate);
             packageManager.atualizarPacote(myPackage);
 
-            return Response.ok().entity(myPackage).links(selfLink, hotelLink, ticketLink).build();
+            return Response.ok().entity(myPackage).links(selfLink, hotelLink, ticketLink, clientLink).build();
         } catch (Exception ex) {
             return invalidDatePatternResponse;
         }
