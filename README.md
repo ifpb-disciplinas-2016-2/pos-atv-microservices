@@ -14,7 +14,7 @@ Para encerrar os serviços, execute o arquivo *shutdown.sh*
 O serviços *REST* da aplicação pode ser acessado nas seguintes *URLs*:
   * Agência - quem cria o pacote de viagem, *URL*: *http://localhost:8082/agency/ws/pacotes*
   * Hotel - *URL*: *http://localhost:8081/hotel/ws/reservas*
-  * Passagem - *URL*: *http://localhost:8080/ticket/ws/reservas*
+  * Passagem - *URL*: *http://localhost:8084/ticket/ws/reservas*
   * Cliente - *URL*: *http://localhost:8083/client/ws/clientes*
 <hr/>
 ### Exemplo de testes
@@ -106,7 +106,7 @@ Response:
 }
 ```
 #### Criar reserva de Passagem
-POST http://localhost:8080/ticket/ws/reservas/
+POST http://localhost:8084/ticket/ws/reservas/
 
 Body:
 ```
@@ -121,7 +121,7 @@ Response:
 }
 ```
 #### Atualizar data da reserva da Passagem
-PUT http://localhost:8080/ticket/ws/reservas/
+PUT http://localhost:8084/ticket/ws/reservas/
 
 Body:
 ```
