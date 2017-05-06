@@ -3,7 +3,8 @@ version: '2'
 services:
 # T I C K E T
   postgres-ticket:
-    container_name: victor-ticket
+    container_name: victor-ticket-container
+    image: victor/postgres-ticket
     build: ./ticket/postgres
     volumes:
       - ./ticket-volume:/var/lib/postgresql
@@ -11,16 +12,18 @@ services:
       - 5433:5432
 
   ticket-service:
-    container_name: victor-ticket_service
+    container_name: victor-ticket_service-container
+    image: victor/ticket
     build: ./ticket/
     ports:
-      - 8080:8080
+      - 8084:8080
     depends_on:
       - postgres-ticket
 
 # H O T E L
   postgres-hotel:
-    container_name: victor-hotel
+    container_name: victor-hotel-container
+    image: victor/postgres-hotel
     build: ./hotel/postgres
     volumes:
       - ./hotel-volume:/var/lib/postgresql
@@ -28,7 +31,8 @@ services:
       - 5434:5432
 
   hotel-service:
-    container_name: victor-hotel_service
+    container_name: victor-hotel_service-container
+    image: victor/hotel
     build: ./hotel/
     ports:
       - 8081:8080
@@ -37,7 +41,8 @@ services:
 
 # A G E N C Y
   postgres-agency:
-    container_name: victor-agency
+    container_name: victor-agency-container
+    image: victor/postgres-agency
     build: ./agency/postgres
     volumes:
       - ./agency-volume:/var/lib/postgresql
@@ -45,15 +50,18 @@ services:
       - 5435:5432
 
   agency-service:
-    container_name: victor-agency_service
+    container_name: victor-agency_service-container
+    image: victor/agency
     build: ./agency/
     ports:
       - 8082:8080
     depends_on:
       - postgres-agency
-# A G E N C Y
+
+# C L I E N T
   postgres-client:
-    container_name: victor-client
+    container_name: victor-client-container
+    image: victor/postgres-client
     build: ./client/postgres
     volumes:
       - ./client-volume:/var/lib/postgresql
@@ -61,7 +69,8 @@ services:
       - 5436:5432
 
   client-service:
-    container_name: victor-client_service
+    container_name: victor-client_service-container
+    image: victor/client
     build: ./client/
     ports:
       - 8083:8080

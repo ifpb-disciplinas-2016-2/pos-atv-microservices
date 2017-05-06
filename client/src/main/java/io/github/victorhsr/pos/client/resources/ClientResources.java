@@ -84,7 +84,7 @@ public class ClientResources {
     }
 
     @PUT
-    @Path("/{id}/nome/{novo_nome}")
+    @Path("/{id}/{novo_nome}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateClient(@PathParam("id") int id, @PathParam("novo_nome") String novoNome) {

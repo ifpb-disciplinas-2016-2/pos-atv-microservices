@@ -51,11 +51,11 @@ public class HotelBooking implements Serializable {
         this.id = id;
     }
 
-    public int getIdClient() {
+    public int getClient() {
         return client;
     }
 
-    public void setIdClient(int idCliente) {
+    public void setClient(int idCliente) {
         this.client = idCliente;
     }
 
